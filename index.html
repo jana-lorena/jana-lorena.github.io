@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wir heiraten! - Jana & Maximilian</title>
+
+    <!-- Favicon using an SVG data URI for a simple, elegant heart icon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+
+    <!-- Google Fonts for an elegant look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Alumni+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- General Styling --- */
+        :root {
+            --background-color: #2a342e;
+            /* Dark Green-Grey */
+            --text-color: #e8e8e3;
+            /* Soft, slightly warm off-white */
+            --accent-color: #c8a1a3;
+            /* Elegant Dusty Rose */
+        }
+
+        html {
+            /* Prevents layout shift when the scrollbar appears on content expansion */
+            overflow-y: scroll;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Alumni Sans', sans-serif;
+            font-size: 22px;
+            /* Larger size for the condensed Alumni Sans font */
+            margin: 0;
+            padding: 0;
+            /* Use Grid for robust centering that ignores scrollbar width */
+            display: grid;
+            place-items: center;
+            text-align: center;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 800px;
+            padding: 2rem 1rem;
+            width: 100%;
+        }
+
+        h1,
+        h2 {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* --- Header Section --- */
+        .header {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-family: 'Alumni Sans Pinstripe', sans-serif;
+            font-size: 7rem;
+            /* Larger size for this very tall, elegant font */
+            margin: 0.5rem 0;
+            font-weight: 400;
+            /* Pinstripe font is best at its native weight */
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        /* --- Section Styling --- */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            border-bottom: 1px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* --- FAQ Section (Accordion Style) --- */
+        .faq-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Subtle light tint for depth */
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        @media (min-width: 768px) {
+            .faq-item:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        .faq-item summary {
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            outline: none;
+            list-style: none;
+            /* Removes the default triangle */
+            position: relative;
+        }
+
+        /* Custom arrow for the accordion */
+        .faq-item summary::after {
+            content: '▾';
+            position: absolute;
+            right: 1.5rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-item .faq-answer {
+            /* Use grid to animate height for a smooth accordion effect */
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-in-out;
+        }
+
+        .faq-item[open] .faq-answer {
+            grid-template-rows: 1fr;
+        }
+
+        .faq-answer>div {
+            overflow: hidden;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* --- RSVP Button --- */
+        .rsvp-button {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            /* Dark text for contrast on the gold button */
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .rsvp-button:hover {
+            background-color: #d3b1b3;
+            /* Lighter rose on hover */
+            transform: translateY(-3px);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* --- Timeline / Schedule Section --- */
+        .timeline-container {
+            overflow-x: auto;
+            max-width: 100%;
+            padding: 0 2rem;
+        }
+
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        /* The vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            width: 2px;
+            background-color: rgba(200, 161, 163, 0.3);
+            /* Faded accent color */
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            /* Space for the dot and line */
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        /* The dot on the timeline */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: var(--background-color);
+            border: 3px solid var(--accent-color);
+        }
+
+        .timeline-time {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .timeline-event h3 {
+            font-size: 1.5rem;
+            margin: 0.5rem 0 0.2rem 0;
+        }
+
+        .timeline-event p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* --- Animation for scroll interaction --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ========= HEADER: NAMES & DATE ========= -->
+        <header class="header">
+            <h1>Jana & Maximilian</h1>
+            <p style="font-size: 3rem;">11. Juli 2026</p>
+        </header>
+
+        <main>
+            <!-- ========= RSVP SECTION ========= -->
+            <section id="rsvp" class="fade-in">
+                <h2>Rückmeldung</h2>
+                <p>Bitte gebt uns bis zum 01.01.2026 Bescheid, ob ihr dabei sein könnt. Wir freuen uns auf euch!</p>
+                <a href="https://forms.gle/RpZSkZDxGwWrXdjd7" target="_blank" class="rsvp-button">Zur Rückmeldung</a>
+            </section>
+
+            <!-- ========= SCHEDULE SECTION ========= -->
+            <section id="schedule" class="fade-in">
+                <h2>Tagesablauf</h2>
+                <div class="timeline-container">
+                    <ul class="timeline">
+                        <li class="timeline-item">
+                            <div class="timeline-time">14:00 Uhr</div>
+                            <div class="timeline-event">
+                                <h3>Trauung</h3>
+                                <p>Irgendwo im Nirgendwo</p>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-time">15:30 Uhr</div>
+                            <div class="timeline-event">
+                                <h3>Sektempfang & Gratulationen</h3>
+                                <p>Bei der Feierlocation</p>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-time">18:00 Uhr</div>
+                            <div class="timeline-event">
+                                <h3>Abendessen</h3>
+                                <p>Lasst es euch schmecken!</p>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-time">ca. 21:00 Uhr</div>
+                            <div class="timeline-event">
+                                <h3>Party & Tanz</h3>
+                                <p>Feiert mit uns bis in die Nacht!</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ========= FAQ SECTION ========= -->
+            <section id="faq" class="fade-in">
+                <h2>Häufig gestellte Fragen</h2>
+
+                <details class="faq-item">
+                    <summary>Gibt es Geschenkwünsche?</summary>
+                    <div class="faq-answer"> <!-- This div is for the grid animation -->
+                        <div>
+                            <p>Wenn ihr uns etwas schenken möchtet, freuen wir uns über ein Geldgeschenk.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Gibt es einen Dresscode?</summary>
+                    <div class="faq-answer"> <!-- This div is for the grid animation -->
+                        <div>
+                            <p>Es gibt keinen Dresscode. Wir wünschen uns, dass ihr euch wohlfühlt und mit uns feiert!
+                            </p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>An wen wende ich mich bei weiteren Fragen?</summary>
+                    <div class="faq-answer"> <!-- This div is for the grid animation -->
+                        <div>
+                            <p>Bei weiteren Fragen könnt ihr euch gerne direkt an uns wenden.</p>
+                        </div>
+                    </div>
+                </details>
+
+            </section>
+        </main>
+
+        <footer class="footer fade-in">
+            <p>Wir können es kaum erwarten, diesen besonderen Tag mit euch zu teilen!</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Simple script for fade-in-on-scroll effect
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimate = document.querySelectorAll('.fade-in');
+            elementsToAnimate.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
