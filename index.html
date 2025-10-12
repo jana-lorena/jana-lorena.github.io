@@ -260,11 +260,127 @@
             transform: translateY(0);
         }
     </style>
+
+    <script>
+        const SALT = "wu-und-wut2026-random-salt"; // change this
+        const STORED_HASH = "1157f6e5af35cb26679a74663df1ad8b8bdf8f6e267bc0c6427b80266a3f24b3"; // example hex - replace
+
+        // Helper: convert ArrayBuffer -> hex string
+        function bufToHex(buffer) {
+            const bytes = new Uint8Array(buffer);
+            return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+        }
+
+        // Compute SHA-256 of a string (UTF-8), return hex string
+        async function sha256Hex(text) {
+            const enc = new TextEncoder();
+            const data = enc.encode(text);
+            const digest = await crypto.subtle.digest("SHA-256", data);
+            return bufToHex(digest);
+        }
+
+        function showContent() {
+            document.getElementById("content").style.display = "block";
+            document.getElementById("login").style.display = "none";
+        }
+
+        async function checkPassword(pw) {
+            try {
+                const candidateHash = await sha256Hex(SALT + pw);
+                if (candidateHash === STORED_HASH) {
+                    showContent();
+                    return true;
+                } else {
+                    // Friendly failure: small delay to make brute-forcing slightly less convenient
+                    await new Promise(r => setTimeout(r, 250));
+                    alert("Wrong password");
+                    return false;
+                }
+            } catch (err) {
+                console.error("Hashing error", err);
+                alert("Error verifying password");
+                return false;
+            }
+        }
+
+        // Read ?pw= from URL. Supports plain or b64 encoded with prefix "b64:" for convenience.
+        function getPasswordFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            let pw = params.get("pw");
+            if (!pw) return null;
+            // If the user encoded it as b64:BASE64VALUE we decode it
+            if (pw.startsWith("b64:")) {
+                try {
+                    const b64 = pw.slice(4);
+                    // atob works for Base64 in browser; handle unicode safely:
+                    const decoded = decodeURIComponent(Array.prototype.map.call(atob(b64), function (c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    }).join(''));
+                    return decoded;
+                } catch (e) {
+                    console.warn("Bad base64 password in URL");
+                    return null;
+                }
+            }
+            return pw;
+        }
+
+        // Handle submit (from button or Enter)
+        async function handleSubmit(e) {
+            if (e) e.preventDefault?.();
+            const pw = document.getElementById("password").value || "";
+            await checkPassword(pw);
+        }
+
+        function init() {
+            // Prevent form real submission in case form element used
+            const form = document.getElementById("pwform");
+            form?.addEventListener("submit", function (e) { e.preventDefault(); handleSubmit(); });
+
+            // Enter key is naturally handled by the form's submit event,
+            // but also add a keydown listener for robustness
+            document.getElementById("password").addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleSubmit();
+                }
+            });
+
+            // Try query param first
+            const qpw = getPasswordFromUrl();
+            if (qpw) {
+                // Note: using password via URL can leak it via logs/history.
+                checkPassword(qpw);
+            }
+        }
+
+        // Optional: small utility to compute the stored hash in-browser (use developer console).
+        // Usage (in console):
+        //   computeStoredHash("yourChosenPassword")
+        // It will print the hex hash for SALT + password which you can paste into STORED_HASH.
+        async function computeStoredHash(plainPw) {
+            const h = await sha256Hex(SALT + plainPw);
+            console.log("SALT:", SALT);
+            console.log("Password:", plainPw);
+            console.log("Computed hash (hex):", h);
+            return h;
+        }
+
+        window.addEventListener("load", init);
+    </script>
+
+
 </head>
 
 <body>
+    <div id="login">
+        <h2>Enter password</h2>
+        <input style="font-size: 1.2rem; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%; margin-bottom: 1rem;" type="password" id="password" />
+        <button class="rsvp-button" onclick="checkPassword()">Submit</button>
+    </div>
 
-    <div class="container">
+
+    <div class="container" style="display:none;" id="content">
 
         <!-- ========= HEADER: NAMES & DATE ========= -->
         <header class="header">
