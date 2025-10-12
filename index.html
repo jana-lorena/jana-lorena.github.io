@@ -375,8 +375,14 @@
 <body>
     <div id="login">
         <h2>Enter password</h2>
-        <input style="font-size: 1.2rem; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%; margin-bottom: 1rem;" type="password" id="password" />
-        <button class="rsvp-button" onclick="checkPassword()">Submit</button>
+        <form id="pwform" onsubmit="return false;">
+            <input
+                style="font-size: 1.2rem; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%; margin-bottom: 1rem;"
+                type="password" id="password" placeholder="Password" aria-label="Password"
+                autocomplete="current-password" />
+            <button class="rsvp-button" onclick="handleSubmit()">Submit</button>
+        </form>
+
     </div>
 
 
