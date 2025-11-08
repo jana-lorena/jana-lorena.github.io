@@ -13,19 +13,16 @@
     <!-- Google Fonts for an elegant look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Alumni+Sans:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
 
     <style>
         /* --- General Styling --- */
         :root {
-            --background-color: #2a342e;
-            /* Dark Green-Grey */
-            --text-color: #e8e8e3;
-            /* Soft, slightly warm off-white */
-            --accent-color: #c8a1a3;
-            /* Elegant Dusty Rose */
+            --background-color: #f1e9e5;
+            --text-color: #78767e;
+            --accent-color: #896689;
+            --light-accent-color: #d2b4b4;
         }
 
         html {
@@ -36,9 +33,8 @@
         body {
             background-color: var(--background-color);
             color: var(--text-color);
-            font-family: 'Alumni Sans', sans-serif;
+            font-family: 'Didact Gothic', sans-serif;
             font-size: 22px;
-            /* Larger size for the condensed Alumni Sans font */
             margin: 0;
             padding: 16px;
             /* Use Grid for robust centering that ignores scrollbar width */
@@ -67,12 +63,10 @@
         }
 
         .header h1 {
-            font-family: 'Alumni Sans Pinstripe', sans-serif;
-            font-size: 7rem;
-            /* Larger size for this very tall, elegant font */
+            font-family: 'Didact Gothic', sans-serif;
+            font-size: 5rem;
             margin: 0.5rem 0;
             font-weight: 400;
-            /* Pinstripe font is best at its native weight */
         }
 
         .header p {
@@ -96,7 +90,7 @@
 
         /* --- FAQ Section (Accordion Style) --- */
         .faq-item {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(210, 180, 180, 0.4);
             /* Subtle light tint for depth */
             border-radius: 8px;
             margin-bottom: 1rem;
@@ -172,7 +166,7 @@
         }
 
         .rsvp-button:hover {
-            background-color: #d3b1b3;
+            background-color: var(--light-accent-color);
             /* Lighter rose on hover */
             transform: translateY(-3px);
         }
@@ -207,7 +201,7 @@
             bottom: 10px;
             left: 10px;
             width: 2px;
-            background-color: rgba(200, 161, 163, 0.3);
+            background-color: var(--light-accent-color);
             /* Faded accent color */
         }
 
@@ -398,7 +392,8 @@
             <!-- ========= RSVP SECTION ========= -->
             <section id="rsvp" class="fade-in">
                 <h2>Rückmeldung</h2>
-                <p>Bitte gebt uns bis zum 28.02.2026 Bescheid, ob ihr dabei sein könnt. Wir freuen uns auf euch!</p>
+                <p>Bitte gebt uns bis zum 28. Februar 2026 Bescheid, ob ihr dabei sein könnt. Wir freuen uns auf euch!
+                </p>
                 <a href="https://forms.gle/RpZSkZDxGwWrXdjd7" target="_blank" class="rsvp-button">Zur Rückmeldung</a>
             </section>
 
@@ -447,8 +442,10 @@
                     <summary>Wer soll zum Standesamt kommen?</summary>
                     <div class="faq-answer"> <!-- This div is for the grid animation -->
                         <div>
-                            <p>Da die Plätze im Standesamt limitiert sind, sind diese vor allem für Eltern, Geschwister und Taufpaten reserviert.
-                            Bitte gebt im verlinkten Formular Bescheid, wenn ihr auch dabei sein möchtet. Basierend auf den Rückmeldungen werden wir euch benachrichtigen, ob ihr dabei sein könnt.
+                            <p>Da die Plätze im Standesamt limitiert sind, sind diese vor allem für Eltern, Geschwister
+                                und Taufpaten reserviert.
+                                Bitte gebt im verlinkten Formular Bescheid, wenn ihr auch dabei sein möchtet. Basierend
+                                auf den Rückmeldungen werden wir euch benachrichtigen, ob ihr dabei sein könnt.
                             </p>
                         </div>
                     </div>
@@ -495,7 +492,8 @@
                     <summary>Wo kann ich übernachten?</summary>
                     <div class="faq-answer"> <!-- This div is for the grid animation -->
                         <div>
-                            <p>Mittagsschlaf zwischen 11:30 und 14:00 Uhr. Bitte pünktlich aufstehen um um 15:00 Uhr in Regensburg zu sein.</p>
+                            <p>Mittagsschlaf zwischen 11:30 und 14:00 Uhr. Bitte pünktlich aufstehen um um 15:00 Uhr in
+                                Regensburg zu sein.</p>
                         </div>
                     </div>
                 </details>
