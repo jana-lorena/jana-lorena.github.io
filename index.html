@@ -282,6 +282,26 @@
             opacity: 0.9;
         }
 
+        /* --- Link Styling --- */
+        .faq-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(137, 102, 137, 0.3);
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        .timeline-event a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(137, 102, 137, 0.3);
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
         /* --- Animation for scroll interaction --- */
         .fade-in {
             opacity: 0;
@@ -446,15 +466,19 @@
                             <div class="timeline-time">10:00 Uhr</div>
                             <div class="timeline-event">
                                 <h3>Trauung</h3>
-                                <p>Standesamt Wolnzach</p>
+                                <a href="https://maps.app.goo.gl/wh1VBj21qWVLxrdT8" target="_blank">
+                                    <span>Standesamt Wolnzach<br>Marktplatz 1, 85283 Wolnzach</span>
+                                </a>
                                 <p style="font-size: 1rem;">Details in den FAQ</p>
                             </div>
                         </li>
                         <li class="timeline-item">
                             <div class="timeline-time">ab 15:00 Uhr</div>
                             <div class="timeline-event">
-                                <p>NineOfive Regensburg</p>
-                                <p>Babostraße 113, 93055 Regensburg</p>
+                                <h3>Feier</h3>
+                                <a href="https://maps.app.goo.gl/gxbgxBmCS3qZw135A" target="_blank">
+                                    <span>NineOfive Regensburg<br>Babostraße 113, 93055 Regensburg</span>
+                                </a>
                             </div>
                         </li>
                         <li class="timeline-item">
@@ -526,8 +550,8 @@
                     <div class="faq-answer"> <!-- This div is for the grid animation -->
                         <div>
                             <p>Grundsätzlich stehen in Regensburg viele Hotels zur Auswahl. In direkter Nähe zur Feier
-                                befinden sich folgendes <a href="https://maps.app.goo.gl/8jnbuLEnTNaabPef7" ,
-                                    target="_blank">Hotel</a>.</p>
+                                befindet sich das <a href="https://maps.app.goo.gl/8jnbuLEnTNaabPef7" ,
+                                    target="_blank">Hampton Hotel</a>.</p>
                         </div>
                     </div>
                 </details>
